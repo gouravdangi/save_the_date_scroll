@@ -375,12 +375,19 @@ body {
     }
     
     .section-1 {
-        background-image: url('assets/_ (15).jpeg') !important;
+        background-image: url('assets/_ (13).jpeg') !important;
         background-size: cover !important;
         background-position: center !important;
         background-repeat: no-repeat !important;
     }
     
+    
+    .section-functions {
+        background-image: url('assets/17.jpeg') !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+    }
     .section-2 {
         background-image: url('assets/_ (16).jpeg') !important;
         background-size: cover !important;
@@ -777,7 +784,103 @@ body {
     }
 }
 
-/* Section 2: Map */
+/* Section Functions: Function Details */
+.section-functions {
+    background: linear-gradient(135deg, rgba(184, 134, 11, 0.3) 0%, rgba(139, 69, 19, 0.4) 100%);
+}
+
+.section-functions .section-title {
+    color: #000000;
+    text-shadow: none;
+}
+
+.functions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.function-item {
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    text-align: left;
+}
+
+.function-item:last-child {
+    border-bottom: none;
+}
+
+.function-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #000000;
+    text-transform: capitalize;
+    min-width: 120px;
+}
+
+.function-date {
+    font-family: 'Dancing Script', cursive;
+    font-size: 16px;
+    color: #000000;
+    font-weight: 600;
+    flex: 1;
+    text-align: center;
+}
+
+.function-time {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    color: #666666;
+    font-weight: 400;
+    text-transform: capitalize;
+    min-width: 100px;
+    text-align: right;
+}
+
+@media (max-width: 768px) {
+    .section-functions .section-title {
+        color: #000000;
+        text-shadow: none;
+        margin-bottom: 30px;
+    }
+    
+    .functions-list {
+        padding: 0 20px;
+    }
+    
+    .function-item {
+        flex-direction: row;
+        align-items: center;
+        padding: 8px 0;
+        gap: 10px;
+        white-space: nowrap;
+    }
+    
+    .function-name {
+        font-size: 16px;
+        min-width: 100px;
+        margin-bottom: 0;
+    }
+    
+    .function-date {
+        font-size: 14px;
+        text-align: center;
+        flex: 1;
+    }
+    
+    .function-time {
+        font-size: 14px;
+        text-align: right;
+        min-width: 80px;
+    }
+}
 .section-2 {
     background: linear-gradient(135deg, rgba(139, 69, 19, 0.4) 0%, rgba(184, 134, 11, 0.3) 100%);
 }
@@ -1176,4 +1279,3 @@ body {
         padding: 30px 15px;
     }
 }
-
