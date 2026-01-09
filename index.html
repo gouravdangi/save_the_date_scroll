@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonu & Gourav - Save The Date</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Envelope Overlay -->
+    <!-- COMMENTED OUT - Will revisit later
+    <div id="envelope-overlay" class="envelope-overlay">
+        <div class="envelope-body">
+            <div class="envelope-flap" id="envelope-flap">
+                <div class="envelope-seal" id="envelope-seal">
+                    <div class="seal-circle">
+                        <p class="seal-text">Click to see magic</p>
+                    </div>
+                </div>
+            </div>
+            <div class="envelope-back"></div>
+        </div>
+    </div>
+    -->
+
+    <!-- Main Content -->
+    <div id="main-content" class="main-content hidden">
+        <!-- Scratch Section: Minimal scratch to reveal -->
+        <div id="scratch-section" class="scratch-section">
+            <div class="scratch-container">
+                <div class="scratch-wrapper">
+                    <div class="date-content" id="date-content">
+                        <h1 class="couple-names">Sonu & Gourav</h1>
+                        <h2 class="wedding-date">26th March</h2>
+                        <p class="year">2026</p>
+                    </div>
+                    <canvas id="scratch-canvas"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 1: Main Content -->
+        <section class="section section-1 hidden" data-bg="https://images.unsplash.com/photo-1519162808019-7de1683fa9ad?w=1920&q=80">
+            <div class="section-content">
+                <div class="heart-container">
+                    <h1 class="couple-names">Sonu & Gourav</h1>
+                    <h2 class="wedding-date">26th March 2026</h2>
+                    <p class="year">Save The Date</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Venue Location -->
+        <section class="section section-2" data-bg="https://images.unsplash.com/photo-1519162808019-7de1683fa9ad?w=1920&q=80">
+            <div class="section-content">
+                <h2 class="section-title">Venue Location</h2>
+                <div class="map-container">
+                    <iframe 
+                        id="map" 
+                        class="map-iframe"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.1234567890123!2d72.8776559!3d19.0759837!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDA0JzMzLjUiTiA3MsKwNTInMzkuNiJF!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin"
+                        width="100%" 
+                        height="400" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                    <button class="map-button" id="map-button">Open in Google Maps</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Wedding Details -->
+        <!-- COMMENTED OUT - Will revisit later
+        <section class="section section-3" data-bg="https://images.unsplash.com/photo-1519162808019-7de1683fa9ad?w=1920&q=80">
+            <div class="section-content">
+                <h2 class="section-title">Wedding Details</h2>
+                <div class="details-container">
+                    <div class="detail-card">
+                        <div class="detail-icon">📅</div>
+                        <h3>Date</h3>
+                        <p>26th March 2026</p>
+                    </div>
+                    <div class="detail-card">
+                        <div class="detail-icon">⏰</div>
+                        <h3>Time</h3>
+                        <p>To be announced</p>
+                    </div>
+                    <div class="detail-card">
+                        <div class="detail-icon">📍</div>
+                        <h3>Venue</h3>
+                        <p>To be announced</p>
+                    </div>
+                    <div class="detail-card">
+                        <div class="detail-icon">👗</div>
+                        <h3>Dress Code</h3>
+                        <p>Traditional / Formal</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        -->
+
+        <!-- Section 4: Program Details -->
+        <!-- COMMENTED OUT - Will revisit later
+        <section class="section section-4" data-bg="https://images.unsplash.com/photo-1519162808019-7de1683fa9ad?w=1920&q=80">
+            <div class="section-content">
+                <h2 class="section-title">Program Details</h2>
+                <div class="program-container">
+                    <div class="program-item">
+                        <div class="program-time">Morning</div>
+                        <div class="program-details">
+                            <h3>Ceremony</h3>
+                            <p>Traditional wedding ceremony</p>
+                        </div>
+                    </div>
+                    <div class="program-item">
+                        <div class="program-time">Afternoon</div>
+                        <div class="program-details">
+                            <h3>Reception</h3>
+                            <p>Celebration and festivities</p>
+                        </div>
+                    </div>
+                    <div class="program-item">
+                        <div class="program-time">Evening</div>
+                        <div class="program-details">
+                            <h3>Dinner</h3>
+                            <p>Traditional dinner and music</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        -->
+
+        <!-- Section 5: Invitation -->
+        <section class="section section-5" data-bg="https://images.unsplash.com/photo-1519162808019-7de1683fa9ad?w=1920&q=80">
+            <div class="section-content">
+                <div class="invitation-container">
+                    <h2 class="invitation-title">Cordial Invitation</h2>
+                    <p class="invitation-text">
+                        We are delighted to invite you to celebrate our special day with us.
+                        Your presence would make our wedding complete.
+                    </p>
+                    <p class="invitation-signature">
+                        With love,<br>
+                        <span class="names">Sonu & Gourav</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Floating Lanterns -->
+    <div class="lanterns-container" id="lanterns-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
