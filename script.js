@@ -22,7 +22,7 @@ envelopeSeal.addEventListener('click', () => {
 // Scratch to Reveal Functionality - Declare variables FIRST
 let isScratching = false;
 let scratchPercentage = 0;
-const scratchThreshold = 250; // Percentage to reveal
+const scratchThreshold = 75; // Percentage to reveal
 let isRevealed = false; // Prevent multiple calls to revealDate
 let totalScratchedArea = 0; // Track total scratched area in pixels
 let canvasArea = 0; // Total canvas area
