@@ -8,6 +8,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        @media (max-width: 768px) {
+            .scratch-text {
+                font-size: 24px !important;
+                top: 15% !important;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Envelope Overlay -->
@@ -38,6 +46,7 @@
                         <p class="year">2026</p>
                     </div>
                     <canvas id="scratch-canvas"></canvas>
+                    <p class="scratch-text" style="position: absolute; top: 10%; left: 50%; transform: translateX(-50%); z-index: 4; text-align: center; pointer-events: none; font-family: 'Dancing Script', cursive; font-size: 28px; color: #333333; font-weight: 600; text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);">Scratch below</p>
                 </div>
             </div>
         </div>
@@ -50,6 +59,35 @@
                     <h2 class="wedding-date">26th March 2026</h2>
                     <p class="year">Save The Date</p>
                 </div>
+            </div>
+        </section>
+
+        <!-- Section 1.5: Function Details -->
+        <section class="section section-functions" data-bg="assets/_ (17).jpeg">
+            <div class="section-content">
+                <h2 class="section-title">Function Details</h2>
+                <ul class="functions-list">
+                    <li class="function-item">
+                        <span class="function-name">Haldi</span>
+                        <span class="function-date">25th March 2026</span>
+                        <span class="function-time">Morning</span>
+                    </li>
+                    <li class="function-item">
+                        <span class="function-name">Sangeet</span>
+                        <span class="function-date">25th March 2026</span>
+                        <span class="function-time">Evening</span>
+                    </li>
+                    <li class="function-item">
+                        <span class="function-name">Mehandi</span>
+                        <span class="function-date">26th March 2026</span>
+                        <span class="function-time">Morning</span>
+                    </li>
+                    <li class="function-item">
+                        <span class="function-name">Phere</span>
+                        <span class="function-date">26th March 2026</span>
+                        <span class="function-time">Evening</span>
+                    </li>
+                </ul>
             </div>
         </section>
 
