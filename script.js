@@ -69,7 +69,7 @@ function initializeScratchCard() {
         // Use larger size for mobile devices
         const isMobile = window.innerWidth <= 768;
         // const sizeMultiplier = isMobile ? 1.0 : 0.9; old
-        const sizeMultiplier = isMobile ? 1.5 : 1.3; // Increased from 1.0/0.9 to ensure better coverage
+        const sizeMultiplier = isMobile ? 1.6 : 1.4; // Increased from 1.0/0.9 to ensure better coverage
         const maxWidth = window.innerWidth * sizeMultiplier; // Removed constraint to heartImage.width
         const maxHeight = window.innerHeight * sizeMultiplier; // Removed constraint to heartImage.height
         // const maxWidth = Math.min(window.innerWidth * sizeMultiplier, heartImage.width); old 
