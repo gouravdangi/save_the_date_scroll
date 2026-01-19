@@ -233,27 +233,98 @@ body {
     height: 100vh;
     perspective: 1200px;
     transition: transform 1.2s ease, opacity 1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .envelope img {
     position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
     user-select: none;
     pointer-events: none;
 }
 
 .envelope .flap {
-    transform-origin: top center;
     transition: transform 2s ease;
     z-index: 2;
 }
 
+/* Mobile-first: Base styles - full screen width, no zoom */
+.envelope .top-flap {
+    transform-origin: top center;
+    width: 100vw;
+    height: auto;
+    top: 0;
+    left: 0;
+    transform: none;
+    object-fit: contain;
+    object-position: top center;
+}
+
+.envelope .bottom-flap {
+    transform-origin: bottom center;
+    z-index: 1; /* Bottom flap should be on top initially */
+    width: 100vw;
+    height: auto;
+    bottom: 0;
+    left: 0;
+    top: auto;
+    transform: none;
+    object-fit: contain;
+    object-position: bottom center;
+}
+
+/* Mobile: Full screen width, no zoom */
+@media (max-width: 768px) {
+    .envelope .top-flap {
+        width: 100vw;
+        height: auto;
+        top: 0;
+        left: 0;
+        object-fit: contain;
+        object-position: top center;
+    }
+    
+    .envelope .bottom-flap {
+        width: 100vw;
+        height: auto;
+        bottom: 0;
+        left: 0;
+        top: auto;
+        object-fit: contain;
+        object-position: bottom center;
+    }
+}
+
+/* Desktop: Full screen width, no zoom */
+@media (min-width: 769px) {
+    .envelope .top-flap {
+        width: 100vw;
+        height: auto;
+        top: 0;
+        left: 0;
+        object-fit: contain;
+        object-position: top center;
+    }
+    
+    .envelope .bottom-flap {
+        width: 100vw;
+        height: auto;
+        bottom: 0;
+        left: 0;
+        top: auto;
+        object-fit: contain;
+        object-position: bottom center;
+    }
+}
+
 /* Envelope Animation States */
-.envelope.open .flap {
+.envelope.open .top-flap {
     transform: rotateX(160deg);
+}
+
+.envelope.open .bottom-flap {
+    transform: rotateX(-160deg); /* Negative rotation opens downward */
 }
 
 .envelope.zoom {
