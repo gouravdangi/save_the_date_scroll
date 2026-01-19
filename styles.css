@@ -213,7 +213,11 @@ body {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: opacity 1s ease, visibility 1s ease;
+    transition: opacity 1s ease, visibility 1s ease, background 0.3s ease;
+}
+
+.envelope-overlay.opening {
+    background: transparent;
 }
 
 .envelope-overlay.hidden {

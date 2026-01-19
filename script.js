@@ -14,6 +14,7 @@ function initializeEnvelope() {
     const envelopeOverlay = document.getElementById('envelope-overlay');
     const envelope = document.getElementById('envelope');
     const mainContent = document.getElementById('main-content');
+    const firstSection = document.querySelector('.section-1');
     
     if (!envelopeOverlay || !envelope) {
         console.error('Envelope elements not found');
@@ -33,6 +34,27 @@ function initializeEnvelope() {
         if (envelopePlayed) return;
         envelopePlayed = true;
         
+        // Show main-content and section-1 immediately when envelope starts opening
+        // This allows the background to be visible during the animation
+        if (mainContent) {
+            mainContent.classList.remove('hidden');
+            mainContent.style.zIndex = '1'; // Behind envelope overlay
+        }
+        
+        // Show section-1 and initialize its background
+        if (firstSection) {
+            firstSection.classList.remove('hidden');
+            firstSection.style.opacity = '1';
+            firstSection.style.zIndex = '1';
+        }
+        
+        // Initialize backgrounds early so section-1 background loads
+        initializeBackgrounds();
+        
+        // Make overlay background transparent so section-1 is visible behind it
+        envelopeOverlay.classList.add('opening');
+        
+        // Start envelope opening animation
         envelope.classList.add('open');
         
         setTimeout(() => {
@@ -46,7 +68,7 @@ function initializeEnvelope() {
         setTimeout(() => {
             envelopeOverlay.classList.add('hidden');
             if (mainContent) {
-                mainContent.classList.remove('hidden');
+                mainContent.style.zIndex = ''; // Reset z-index
             }
             document.body.style.overflow = 'auto';
             initializeWebsite();
