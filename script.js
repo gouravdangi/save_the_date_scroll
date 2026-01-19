@@ -1,24 +1,62 @@
-// Envelope Opening Animation
-// COMMENTED OUT - Will revisit later
-/*
-const envelopeOverlay = document.getElementById('envelope-overlay');
-const envelopeSeal = document.getElementById('envelope-seal');
-const mainContent = document.getElementById('main-content');
+// ============================================
+// REVEAL METHOD CONFIGURATION
+// ============================================
+// Set to true to use envelope opening animation
+// Set to false to use scratch-to-reveal (heart layer)
+const USE_ENVELOPE = true;
 
-// Disable scrolling initially
-document.body.style.overflow = 'hidden';
+// ============================================
+// ENVELOPE OPENING ANIMATION
+// ============================================
+let envelopePlayed = false;
 
-envelopeSeal.addEventListener('click', () => {
-    envelopeOverlay.classList.add('opening');
+function initializeEnvelope() {
+    const envelopeOverlay = document.getElementById('envelope-overlay');
+    const envelope = document.getElementById('envelope');
+    const mainContent = document.getElementById('main-content');
     
-    setTimeout(() => {
-        envelopeOverlay.classList.add('hidden');
-        mainContent.classList.remove('hidden');
-        initializeWebsite();
-    }, 1500);
-});
-*/
+    if (!envelopeOverlay || !envelope) {
+        console.error('Envelope elements not found');
+        return;
+    }
+    
+    // Ensure envelope overlay is visible and main content is hidden
+    envelopeOverlay.classList.remove('hidden');
+    if (mainContent) {
+        mainContent.classList.add('hidden');
+    }
+    
+    // Disable scrolling initially
+    document.body.style.overflow = 'hidden';
+    
+    envelopeOverlay.addEventListener('click', () => {
+        if (envelopePlayed) return;
+        envelopePlayed = true;
+        
+        envelope.classList.add('open');
+        
+        setTimeout(() => {
+            envelope.classList.add('zoom');
+        }, 700);
+        
+        setTimeout(() => {
+            envelope.classList.add('fade');
+        }, 1200);
+        
+        setTimeout(() => {
+            envelopeOverlay.classList.add('hidden');
+            if (mainContent) {
+                mainContent.classList.remove('hidden');
+            }
+            document.body.style.overflow = 'auto';
+            initializeWebsite();
+        }, 2000);
+    });
+}
 
+// ============================================
+// SCRATCH TO REVEAL FUNCTIONALITY
+// ============================================
 // Scratch to Reveal Functionality - Declare variables FIRST
 let isScratching = false;
 let scratchPercentage = 0;
@@ -28,11 +66,32 @@ let totalScratchedArea = 0; // Track total scratched area in pixels
 let canvasArea = 0; // Total canvas area
 let initialOpaquePixels = 0; // Track how many pixels were opaque initially (to exclude pre-existing transparent areas)
 
-// Direct initialization without envelope
-const mainContent = document.getElementById('main-content');
-document.body.style.overflow = 'hidden';
-mainContent.classList.remove('hidden');
-initializeWebsite();
+function initializeScratch() {
+    const mainContent = document.getElementById('main-content');
+    document.body.style.overflow = 'hidden';
+    mainContent.classList.remove('hidden');
+    initializeWebsite();
+}
+
+// ============================================
+// INITIALIZATION
+// ============================================
+// Initialize based on configuration
+if (USE_ENVELOPE) {
+    // Hide envelope overlay initially if not using it (for easy switching)
+    const envelopeOverlay = document.getElementById('envelope-overlay');
+    if (envelopeOverlay) {
+        envelopeOverlay.style.display = 'flex';
+    }
+    initializeEnvelope();
+} else {
+    // Hide envelope overlay if using scratch mode
+    const envelopeOverlay = document.getElementById('envelope-overlay');
+    if (envelopeOverlay) {
+        envelopeOverlay.style.display = 'none';
+    }
+    initializeScratch();
+}
 
 function initializeScratchCard() {
     const canvas = document.getElementById('scratch-canvas');
@@ -503,30 +562,49 @@ function initializeSmoothScroll() {
 
 // Initialize website after envelope opens
 function initializeWebsite() {
-    // Show scratch section
-    const scratchSection = document.getElementById('scratch-section');
-    if (scratchSection) {
-        scratchSection.style.display = 'flex';
+    if (USE_ENVELOPE) {
+        // Envelope mode: Show section-1 immediately
+        const firstSection = document.querySelector('.section-1');
+        if (firstSection) {
+            firstSection.classList.remove('hidden');
+            firstSection.style.opacity = '1';
+        }
+        
+        // Show other sections
+        const otherSections = document.querySelectorAll('.section:not(.section-1)');
+        otherSections.forEach(section => {
+            section.style.opacity = '1';
+        });
+        
+        // Create lanterns immediately
+        createLanterns();
+    } else {
+        // Scratch mode: Show scratch section
+        const scratchSection = document.getElementById('scratch-section');
+        if (scratchSection) {
+            scratchSection.style.display = 'flex';
+        }
+        
+        // Keep section-1 hidden initially (will show after scratch reveal)
+        const firstSection = document.querySelector('.section-1');
+        if (firstSection) {
+            firstSection.classList.add('hidden');
+        }
+        
+        initializeScratchCard();
+        
+        // Hide other sections initially
+        const otherSections = document.querySelectorAll('.section:not(.section-1)');
+        otherSections.forEach(section => {
+            section.style.opacity = '0';
+        });
     }
     
-    // Keep section-1 hidden initially (will show after scratch reveal)
-    const firstSection = document.querySelector('.section-1');
-    if (firstSection) {
-        firstSection.classList.add('hidden');
-    }
-    
-    initializeScratchCard();
     initializeMap();
     initializeSmoothScroll();
     initializeBackgrounds();
     
-    // Hide other sections initially
-    const otherSections = document.querySelectorAll('.section:not(.section-1)');
-    otherSections.forEach(section => {
-        section.style.opacity = '0';
-    });
-    
-    // Event listeners (but scrolling disabled until date revealed)
+    // Event listeners
     let ticking = false;
     window.addEventListener('scroll', () => {
         if (!ticking) {
@@ -538,17 +616,17 @@ function initializeWebsite() {
             ticking = true;
         }
     });
-    
-    // Create lanterns will be triggered after date reveal and first section fades in
 }
 
 // Handle window resize
 window.addEventListener('resize', () => {
-    const canvas = document.getElementById('scratch-canvas');
-    const scratchSection = document.getElementById('scratch-section');
-    if (canvas && scratchSection && !scratchSection.classList.contains('hidden')) {
-        // Reinitialize scratch card on resize
-        initializeScratchCard();
+    if (!USE_ENVELOPE) {
+        const canvas = document.getElementById('scratch-canvas');
+        const scratchSection = document.getElementById('scratch-section');
+        if (canvas && scratchSection && !scratchSection.classList.contains('hidden')) {
+            // Reinitialize scratch card on resize
+            initializeScratchCard();
+        }
     }
 });
 

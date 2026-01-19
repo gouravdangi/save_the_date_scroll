@@ -34,9 +34,38 @@
     </div>
     -->
 
+    <!-- ============================================ -->
+    <!-- REVEAL METHOD CONFIGURATION -->
+    <!-- ============================================ -->
+    <!-- 
+        To switch between reveal methods:
+        
+        FOR ENVELOPE MODE (currently active):
+        - Set USE_ENVELOPE = true in script.js (line ~3)
+        - Keep envelope overlay below uncommented
+        - Keep scratch section commented out
+        
+        FOR SCRATCH MODE (heart layer):
+        - Set USE_ENVELOPE = false in script.js (line ~3)
+        - Comment out the envelope overlay below
+        - Uncomment the scratch section in main-content
+    -->
+    
+    <!-- Envelope Opening Animation Overlay -->
+    <!-- COMMENT OUT THIS SECTION TO USE SCRATCH MODE -->
+    <div id="envelope-overlay" class="envelope-overlay">
+        <div class="envelope" id="envelope">
+            <img src="assets/bottom_layer.png" alt="Envelope Base">
+            <img src="assets/top_layer.png" alt="Envelope Flap" class="flap">
+        </div>
+    </div>
+
     <!-- Main Content -->
     <div id="main-content" class="main-content hidden">
         <!-- Scratch Section: Minimal scratch to reveal -->
+        <!-- UNCOMMENT THIS SECTION TO USE SCRATCH MODE (heart layer) -->
+        <!-- Also set USE_ENVELOPE = false in script.js and comment out envelope overlay above -->
+        <!--
         <div id="scratch-section" class="scratch-section">
             <div class="scratch-container">
                 <div class="scratch-wrapper">
@@ -50,6 +79,7 @@
                 </div>
             </div>
         </div>
+        -->
 
         <!-- Section 1: Main Content -->
         <section class="section section-1 hidden" data-bg="https://images.unsplash.com/photo-1519162808019-7de1683fa9ad?w=1920&q=80">

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Envelope Reveal</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, sans-serif;
+      overflow: hidden;
+    }
+
+    /* -------- INTRO OVERLAY -------- */
+    #intro {
+      position: fixed;
+      inset: 0;
+      background: #f4efe9; /* soft paper tone */
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .envelope {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      perspective: 1200px;
+      transition: transform 1.2s ease, opacity 1s ease;
+    }
+
+    .envelope img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .flap {
+      transform-origin: top center;
+      transition: transform 2s ease;
+      z-index: 2;
+    }
+
+    /* -------- ANIMATION STATES -------- */
+
+    .open .flap {
+      transform: rotateX(160deg);
+    }
+
+    .zoom {
+      transform: scale(1.08);
+    }
+
+    .fade {
+      opacity: 0;
+    }
+
+    /* -------- ACTUAL WEBSITE -------- */
+
+    #site {
+      min-height: 100vh;
+      padding: 40px 20px;
+      background: white;
+    }
+
+    #site h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    #site p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- INTRO / ENVELOPE -->
+  <div id="intro">
+    <div class="envelope" id="envelope">
+      <img src="bottom_layer.png" alt="Envelope Base">
+      <img src="top_layer.png" alt="Envelope Flap" class="flap">
+    </div>
+  </div>
+
+  <!-- REAL WEBSITE CONTENT -->
+  <div id="site">
+    <h1>Welcome ✨</h1>
+    <p>
+      This is your actual website content.
+      The envelope animation has revealed this page.
+    </p>
+  </div>
+
+  <script>
+    const intro = document.getElementById("intro");
+    const envelope = document.getElementById("envelope");
+
+    let played = false;
+
+    intro.addEventListener("click", () => {
+      if (played) return;
+      played = true;
+
+      envelope.classList.add("open");
+
+      setTimeout(() => {
+        envelope.classList.add("zoom");
+      }, 700);
+
+      setTimeout(() => {
+        envelope.classList.add("fade");
+      }, 1200);
+
+      setTimeout(() => {
+        intro.remove();
+        document.body.style.overflow = "auto";
+      }, 2000);
+    });
+  </script>
+
+</body>
+</html>
