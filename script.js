@@ -121,10 +121,14 @@ if (USE_ENVELOPE) {
     }
     initializeEnvelope();
 } else {
-    // Hide envelope overlay if using scratch mode
+    // Hide envelope overlay if using scratch mode - ensure it's completely hidden
     const envelopeOverlay = document.getElementById('envelope-overlay');
     if (envelopeOverlay) {
         envelopeOverlay.style.display = 'none';
+        envelopeOverlay.style.visibility = 'hidden';
+        envelopeOverlay.style.opacity = '0';
+        envelopeOverlay.style.pointerEvents = 'none';
+        envelopeOverlay.classList.add('hidden');
     }
     initializeScratch();
 }
