@@ -353,11 +353,12 @@ body {
     display: none;
     justify-content: center;
     align-items: center;
+    pointer-events: auto;
 }
 
 @media (max-width: 768px) {
     .scratch-section {
-        background-image: url('assets/_ (6).jpg');
+        background-image: url('assets/_ (6).jpeg');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -485,6 +486,8 @@ body {
     max-width: 110vw;
     max-height: 110vh;
     object-fit: contain;
+    pointer-events: auto !important;
+    touch-action: none;
 }
 
 /* Sections */

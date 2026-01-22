@@ -3,7 +3,7 @@
 // ============================================
 // Set to true to use envelope opening animation
 // Set to false to use scratch-to-reveal (heart layer)
-const USE_ENVELOPE = true;
+const USE_ENVELOPE = false;
 
 // ============================================
 // ENVELOPE OPENING ANIMATION
@@ -90,8 +90,22 @@ let initialOpaquePixels = 0; // Track how many pixels were opaque initially (to 
 
 function initializeScratch() {
     const mainContent = document.getElementById('main-content');
+    const scratchSection = document.getElementById('scratch-section');
     document.body.style.overflow = 'hidden';
+    
+    // Show main content
     mainContent.classList.remove('hidden');
+    mainContent.style.display = 'block';
+    
+    // Show scratch section immediately
+    if (scratchSection) {
+        scratchSection.style.display = 'flex';
+        scratchSection.style.visibility = 'visible';
+        scratchSection.style.opacity = '1';
+        scratchSection.style.pointerEvents = 'auto';
+        scratchSection.classList.remove('hidden');
+    }
+    
     initializeWebsite();
 }
 
@@ -135,8 +149,26 @@ function initializeScratchCard() {
     scratchPercentage = 0;
     totalScratchedArea = 0;
     
-    // Ensure canvas is visible
+    // Ensure scratch section is visible
+    if (scratchSection) {
+        scratchSection.style.display = 'flex';
+        scratchSection.style.visibility = 'visible';
+        scratchSection.style.opacity = '1';
+        scratchSection.style.pointerEvents = 'auto';
+        scratchSection.classList.remove('hidden');
+    }
+    
+    // Ensure canvas is visible and interactive
     canvas.style.display = 'block';
+    canvas.style.visibility = 'visible';
+    canvas.style.opacity = '1';
+    canvas.style.pointerEvents = 'auto';
+    canvas.style.cursor = 'crosshair';
+    canvas.style.touchAction = 'none'; // Prevent default touch behavior
+    canvas.style.position = 'absolute';
+    canvas.style.zIndex = '2';
+    
+    console.log('Canvas initialized, ready for scratching');
     
     // Load heart image
     const heartImage = new Image();
@@ -222,21 +254,37 @@ function initializeScratchCard() {
     let lastY = 0;
     
     function setupScratchEvents() {
+    console.log('Setting up scratch events on canvas');
     
     function getEventPos(e) {
         const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        
         return {
-            x: (e.touches ? e.touches[0].clientX : e.clientX) - rect.left,
-            y: (e.touches ? e.touches[0].clientY : e.clientY) - rect.top
+            x: (clientX - rect.left) * scaleX,
+            y: (clientY - rect.top) * scaleY
         };
     }
     
     function scratch(x, y) {
+        // Ensure coordinates are within canvas bounds
+        x = Math.max(0, Math.min(x, canvas.width));
+        y = Math.max(0, Math.min(y, canvas.height));
+        
+        // Set composite operation to erase (must stay active)
         ctx.globalCompositeOperation = 'destination-out';
         const brushRadius = 30; // Brush radius - smaller for more deliberate scratching
         ctx.lineWidth = brushRadius * 2; // Increased brush size
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
+        
+        // Set fill and stroke styles (color doesn't matter for destination-out, but opacity does)
+        ctx.fillStyle = 'rgba(0, 0, 0, 1)';
+        ctx.strokeStyle = 'rgba(0, 0, 0, 1)';
         
         // Track if this is the first scratch before updating lastX/lastY
         const isFirstScratch = (lastX === 0 && lastY === 0);
@@ -247,6 +295,7 @@ function initializeScratchCard() {
             ctx.beginPath();
             ctx.arc(x, y, brushRadius, 0, Math.PI * 2);
             ctx.fill();
+            console.log('First scratch at:', x, y, 'canvas size:', canvas.width, canvas.height);
         } else {
             ctx.beginPath();
             ctx.moveTo(lastX, lastY);
@@ -374,6 +423,8 @@ function initializeScratchCard() {
         lastX = 0;
         lastY = 0;
     });
+    
+    console.log('Scratch events attached successfully');
     }
 }
 
@@ -605,6 +656,11 @@ function initializeWebsite() {
         const scratchSection = document.getElementById('scratch-section');
         if (scratchSection) {
             scratchSection.style.display = 'flex';
+            scratchSection.style.visibility = 'visible';
+            scratchSection.style.opacity = '1';
+            scratchSection.style.pointerEvents = 'auto';
+            scratchSection.style.zIndex = '9999';
+            scratchSection.classList.remove('hidden');
         }
         
         // Keep section-1 hidden initially (will show after scratch reveal)
